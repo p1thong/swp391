@@ -1,13 +1,14 @@
 package com.p1thong.springsecurity;
 
-import com.p1thong.springsecurity.entity.Role;
-import com.p1thong.springsecurity.entity.User;
-import com.p1thong.springsecurity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.p1thong.springsecurity.entity.Role;
+import com.p1thong.springsecurity.entity.User;
+import com.p1thong.springsecurity.repository.UserRepository;
 
 @SpringBootApplication
 public class SpringsecurityApplication implements CommandLineRunner {

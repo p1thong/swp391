@@ -1,10 +1,10 @@
 package com.p1thong.springsecurity.service;
 
-import com.p1thong.springsecurity.entity.User;
+import java.util.Map;
+
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.p1thong.springsecurity.entity.User;
 
 public interface JwtService {
 

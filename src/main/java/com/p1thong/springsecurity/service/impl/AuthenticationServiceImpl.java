@@ -1,5 +1,12 @@
 package com.p1thong.springsecurity.service.impl;
 
+import java.util.HashMap;
+
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import com.p1thong.springsecurity.dto.JwtAuthenticationResponse;
 import com.p1thong.springsecurity.dto.RefreshTokenRequest;
 import com.p1thong.springsecurity.dto.SigninRequest;
@@ -9,13 +16,8 @@ import com.p1thong.springsecurity.entity.User;
 import com.p1thong.springsecurity.repository.UserRepository;
 import com.p1thong.springsecurity.service.AuthenticationService;
 import com.p1thong.springsecurity.service.JwtService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +29,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JwtService jwtService;
 
     public User signup(SignupRequest signupRequest) {
+        if(userRepository.findByEmail(signupRequest.getEmail()).isPresent()) {
+            throw new RuntimeException("Email is already existed");
+        }
         User user = new User();
-
         user.setFullname(signupRequest.getFullname());
         user.setEmail(signupRequest.getEmail());
         user.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
